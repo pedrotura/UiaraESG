@@ -1,0 +1,129 @@
+<header class="cabecalho">
+    <app-navbar></app-navbar>
+</header>
+<main class="conteudo row">
+    <div class="col-md-3 faixa"></div>
+    <div class="container bg-light col-md-9 d-flex justify-content-start">
+        <div class="my-3 teste p-4">
+            <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="formulario row g-3" id="registroForm">
+                <h2 class="fs-1 fw-bolder">Dados da organização</h2>
+                <p class="fs-4 fw-semibold">Preencha os campos abaixo com informações da sua organização. </p>
+                <div class="col-md-4">
+                    <label class="form-label" for="cnpj">CNPJ *</label>
+                    <input class="form-control" type="text" formControlName="cnpj" id="cnpj" placeholder="00.000.000/0000-00">
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label" for="nomeEmpresa">Nome *</label>
+                    <input class="form-control" type="text" formControlName="nomeEmpresa" id="nomeEmpresa" readonly placeholder="Razão social da empresa">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="receitaBruta">Receita bruta *</label>
+                    <select class="form-select" formControlName="receitaBruta" id="receitaBruta">
+                        <option value="">Selecione a receita bruta</option>
+                        <option value="receita0">Até R$ 500.000,00</option>
+                        <option value="receita1">R$ 500.000,00 - R$ 1.000.000,00</option>
+                        <option value="receita2">R$ 1.000.000,00 - R$ 1.500.000,00</option>
+                        <option value="receita3">R$ 1.500.000,00 - R$ 2.000.000,00</option>
+                        <option value="receita4">R$ 2.000.000,00 - R$ 2.500.000,00</option>
+                        <option value="receita5">R$ 2.500.000,00 - R$ 3.000.000,00</option>
+                        <option value="receita6">Superior a R$ 3.000.000,00</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="qtdEmpregados">Quantidade de empregados *</label>
+                    <select class="form-select" formControlName="qtdEmpregados" id="qtdEmpregados">
+                        <option value="">Selecione a quantidade de empregados</option>
+                        <option value="quantidade0">Até 20</option>
+                        <option value="quantidade1">20 - 100</option>
+                        <option value="quantidade2">101 - 500</option>
+                        <option value="quantidade3">501 - 1000</option>
+                        <option value="quantidade4">Superior a 1000</option>
+                    </select>
+                </div>
+                <ng-container formGroupName="local">
+                    <div class="col-md-3">
+                        <label class="form-label" for="cep">CEP *</label>
+                        <input class="form-control" type="text" formControlName="cep" id="cep" placeholder="00000-000">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="endereco">Endereço *</label>
+                        <input class="form-control" type="text" formControlName="endereco" id="endereco" readonly
+                            placeholder="Rua, avenida, logradouro">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="numeroEndereco">Número *</label>
+                        <input class="form-control" type="text" formControlName="numeroEndereco" id="numeroEndereco" placeholder="0000">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="complemento">Complemento</label>
+                        <input class="form-control" type="text" formControlName="complemento" id="complemento"
+                            placeholder="Apartamento, bloco">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="cidade">Cidade *</label>
+                        <input class="form-control" type="text" formControlName="cidade" id="cidade" readonly placeholder="Nome da cidade">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="estado">Estado *</label>
+                        <input class="form-control" type="text" formControlName="estado" id="estado" readonly placeholder="UF">
+                    </div>
+                </ng-container>
+                <h2 class="fs-1 fw-bolder">Dados do representante</h2>
+                <p class="fs-4 fw-semibold">As organizações registradas em nosso sistema precisam de um representante legal. Complete o cadastro a seguir.</p>
+                <ng-container formGroupName="representante">
+                    <div class="col-md-4">
+                        <label class="form-label" for="cpf">CPF *</label>
+                        <input class="form-control" id="cpf" type="text" formControlName="cpf" placeholder="000.000.000-00">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="nomeRepresentante">Nome *</label>
+                        <input class="form-control" type="text" formControlName="nomeRepresentante" id="nomeRepresentante"
+                            placeholder="Digite o seu nome">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="sobrenomeRepresentante">Sobrenome *</label>
+                        <input class="form-control" type="text" formControlName="sobrenomeRepresentante" id="sobrenomeRepresentante"
+                            placeholder="Digite o seu sobrenome">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="telefone">Telefone *</label>
+                        <input class="form-control" type="text" formControlName="telefone" id="telefone" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="email">E-mail *</label>
+                        <input class="form-control" type="email" formControlName="email" id="email" placeholder="exemplo@email.com">
+                    </div>
+                    <div class="form-text">Lembre-se de adicionar o DDD.</div>
+                </ng-container>
+                <h2 class="fs-1 fw-bolder">Dados de login</h2>
+                <p class="fs-4 fw-semibold">Estamos quase lá. Agora, é necessário adicionar algumas informações sobre o perfil da empresa.</p>
+                <div class="col-md-6">
+                    <label class="form-label" for="senha">Senha *</label>
+                    <div class="input-group">
+                        <input class="form-control" id="senha" maxlength="20" type="password" formControlName="senha" required placeholder="Digite a sua senha">
+                        <i class="input-group-text bi bi-eye-slash" id="iconeSenha"></i>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="senhaConfirma">Confirme a senha *</label>
+                    <div class="input-group">
+                        <input class="form-control" id="senhaConfirma" maxlength="20" type="password" formControlName="senhaConfirma" required placeholder="Digite a sua senha novamente">
+                        <i class="input-group-text bi bi-eye-slash" id="iconeSenhaConfirma"></i>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="concordarTermos" type="checkbox" required>
+                    <label class="form-check-label" for="concordarTermos">Concordo com os termos de condições do site *</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="aceitarEmails" type="checkbox">
+                    <label class="form-check-label" for="aceitarEmails">Aceito receber e-mails com ofertas e atualizações</label>
+                </div>
+                <div class="col-12 d-flex justify-content-end mt-4">
+                    <button type="submit" class="botao botao_principal botao_formulario" id="btnAvancar">Avançar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>
