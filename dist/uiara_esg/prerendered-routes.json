@@ -1,0 +1,10 @@
+{
+  "routes": [
+    "/",
+    "/cadastro",
+    "/empresas",
+    "/home",
+    "/perguntas",
+    "/pessoas"
+  ]
+}
