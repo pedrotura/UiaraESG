@@ -4,7 +4,9 @@
     "/cadastro",
     "/empresas",
     "/home",
+    "/login",
     "/perguntas",
-    "/pessoas"
+    "/pessoas",
+    "/senha-reset"
   ]
 }

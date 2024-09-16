@@ -1,0 +1,21 @@
+main {
+    height: 100vh;
+}
+
+button {
+    width: 100%;
+    padding: 0.6em 1.5em;
+}
+
+img {
+    width: 40%;
+}
+
+.login-span {
+    color: var(--azul-principal);
+}
+
+.login-span:hover {
+    color: #0957aa;
+    transition: .2s;
+}

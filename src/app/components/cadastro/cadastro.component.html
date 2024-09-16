@@ -1,11 +1,11 @@
 <header class="cabecalho">
     <app-navbar></app-navbar>
 </header>
-<main class="conteudo row">
+<main class="row">
     <div class="col-md-3 faixa"></div>
     <div class="container bg-light col-md-9 d-flex justify-content-start">
         <div class="my-3 teste p-4">
-            <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="formulario row g-3" id="registroForm">
+            <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="row g-3" id="cadastroForm">
                 <h2 class="fs-1 fw-bolder">Dados da organização</h2>
                 <p class="fs-4 fw-semibold">Preencha os campos abaixo com informações da sua organização. </p>
                 <div class="col-md-4">
@@ -92,15 +92,15 @@
                         <label class="form-label" for="email">E-mail *</label>
                         <input class="form-control" type="email" formControlName="email" id="email" placeholder="exemplo@email.com">
                     </div>
-                    <div class="form-text">Lembre-se de adicionar o DDD.</div>
+                    <p class="form-text">Lembre-se de adicionar o DDD.</p>
                 </ng-container>
                 <h2 class="fs-1 fw-bolder">Dados de login</h2>
                 <p class="fs-4 fw-semibold">Estamos quase lá. Agora, é necessário adicionar algumas informações sobre o perfil da empresa.</p>
                 <div class="col-md-6">
                     <label class="form-label" for="senha">Senha *</label>
                     <div class="input-group mb-2">
-                        <input class="form-control" id="senha" maxlength="20" type="password" formControlName="senha" required placeholder="Digite a sua senha">
-                        <i class="input-group-text bi bi-eye-slash" id="iconeSenha"></i>
+                        <input class="form-control senha" id="senha" maxlength="20" type="password" formControlName="senha" placeholder="Digite a sua senha">
+                        <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenha"></i>
                     </div>
                     <ul class="list-unstyled">
                         @for(req of requirements; track req.id) {
@@ -114,8 +114,8 @@
                 <div class="col-md-6">
                     <label class="form-label" for="senhaConfirma">Confirme a senha *</label>
                     <div class="input-group mb-2">
-                        <input class="form-control" id="senhaConfirma" maxlength="20" type="password" formControlName="senhaConfirma" required placeholder="Digite a sua senha novamente">
-                        <i class="input-group-text bi bi-eye-slash" id="iconeSenhaConfirma"></i>
+                        <input class="form-control senha" id="senhaConfirma" maxlength="20" type="password" formControlName="senhaConfirma" placeholder="Digite a sua senha novamente">
+                        <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenhaConfirma"></i>
                     </div>
                     <li class="requirement d-flex align-items-center text-danger fw-medium">
                         <i class="bi bi-x requirement-icon requirement-confirm mb-1" id="reqIcon4"></i>
@@ -123,15 +123,19 @@
                     </li>
                 </div>
                 <div class="form-check mt-0">
-                    <input class="form-check-input" id="concordarTermos" type="checkbox" required>
-                    <label class="form-check-label" for="concordarTermos">Concordo com os termos de condições do site *</label>
+                    <label class="form-check-label" for="concordarTermos">
+                        <input class="form-check-input" id="concordarTermos" type="checkbox" formControlName="concordarTermos">
+                        Concordo com os termos de condições do site *
+                    </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" id="aceitarEmails" type="checkbox">
-                    <label class="form-check-label" for="aceitarEmails">Aceito receber e-mails com ofertas e atualizações</label>
+                    <label class="form-check-label" for="aceitarEmails">
+                        <input class="form-check-input" id="aceitarEmails" type="checkbox" formControlName="aceitarEmails">
+                        Aceito receber e-mails com ofertas e atualizações
+                    </label>
                 </div>
                 <div class="col-12 d-flex justify-content-end mt-4">
-                    <button type="submit" class="btn botao botao_principal botao_formulario" id="btnAvancar">Avançar</button>
+                    <button type="submit" class="btn botao botao_principal botao_formulario" id="btnAvancar" [disabled]="!cadastroForm.valid">Avançar</button>
                 </div>
             </form>
         </div>

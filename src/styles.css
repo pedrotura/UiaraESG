@@ -9,6 +9,7 @@
     --roxo-principal: #7633cc;
     --laranja-secundario: #f4784d;
     --roxo-secundario: #794bf9;
+    --vermelho: #ca2843;
     --laranja-degrade: linear-gradient(97.54deg, #fa911a 35.49%, #e05f49 165.37%);
     --verde-degrade: linear-gradient(97.54deg, #5edf5f 35.49%, #04a978 165.37%);
     --azul-degrade: linear-gradient(97.54deg, #40cdb3 35.49%, #006fe9 165.37%);
@@ -30,17 +31,17 @@ html {
 
 body {
     overflow-x: hidden;
-    width: 100vw;
     background-color: var(--cor-de-fundo);
+}
+
+header {
+    color: var(--cor-de-fundo);
+    background-color: var(--preto);
+    padding: 0 0.75em;
 }
 
 .resize {
     width: 20vw;
-}
-
-.cabecalho {
-    background-color: var(--preto);
-    padding: 0 5%;
 }
 
 .fundo_imagem {
@@ -85,7 +86,9 @@ body {
     transition: 0.2s;
 }
 
+
 .botao_formulario:hover {
+    color: var(--branco);
     background-color: #04a978;
     border-color: #04a978;
     transition: 0.4s;
@@ -103,4 +106,8 @@ body {
 
 .teste {
     width: 80%;
+}
+
+.faixa {
+    background: var(--verde-degrade);
 }

@@ -4,6 +4,7 @@ import { FooterComponent } from "../footer/footer.component";
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegexValidations, PasswordFormatting } from '../../shared/form-utilities';
 import { CadastroService } from '../../services/cadastro.service';
 import { Empresa } from '../../interfaces/empresa';
 import { Router } from '@angular/router';
@@ -48,58 +49,19 @@ export class CadastroComponent {
         email: ['', [Validators.required, Validators.email]]
       }),
       senha: ['', [Validators.required, this.senhaValidator]],
-      senhaConfirma: ['', Validators.required]
+      senhaConfirma: ['', Validators.required],
+      concordarTermos: [null, Validators.pattern(/true/)],
+      aceitarEmails: [null]
     }, { validators: this.senhaConfirmaValidator }
   );
   }
-  
+
   validarFormatos(): void {
-    const cnpj = document.querySelector('#cnpj') as HTMLInputElement;
-
-    cnpj.addEventListener('input', function () {
-      cnpj.value = cnpj.value
-        .replace(/\D/g, "")
-        .replace(/(\d{2})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d)/, "$1/$2")
-        .replace(/(\d{4})(\d)/, "$1-$2");
-    });
-
-    const cep = document.querySelector('#cep') as HTMLInputElement;
-
-    cep.addEventListener('input', function () {
-      cep.value = cep.value
-        .replace(/\D/g, "")
-        .replace(/(\d{5})(\d)/, "$1-$2");
-    });
-
-    const cpf = document.querySelector('#cpf') as HTMLInputElement;
-
-    cpf.addEventListener('input', function () {
-      cpf.value = cpf.value
-        .replace(/\D/g, "")
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    });
-
-    const numeroEndereco = document.querySelector('#numeroEndereco') as HTMLInputElement;
-
-    numeroEndereco.addEventListener('input', function () {
-      numeroEndereco.value = numeroEndereco.value
-        .replace(/\D/, "");
-    });
-
-    const telefone = document.querySelector('#telefone') as HTMLInputElement;
-
-    telefone.addEventListener('input', function () {
-      telefone.value = telefone.value
-        .replace(/\D/g, "")
-        .replace(/(\d)/, "($1")
-        .replace(/(\d{2})(\d)/, "$1) $2")
-        .replace(/(\d{4})(\d)/, "$1-$2")
-        .replace(/^(\(\d{2}\) )(\d{4})-(\d)(\d{4})/, "$1$2$3-$4");
-    });
+    RegexValidations.validarCNPJ();
+    RegexValidations.validarCEP();
+    RegexValidations.validarCPF();
+    RegexValidations.validarEndereco();
+    RegexValidations.validarTelefone();
   }
 
   buscarEmpresa(): void {
@@ -158,32 +120,6 @@ export class CadastroComponent {
     });
   }
 
-  formatarCampoSenha(): void {
-
-    const senha = document.querySelector('#senha');
-    const iconeSenha = document.querySelector('#iconeSenha');
-
-    const senhaConfirma = document.querySelector('#senhaConfirma');
-    const iconeSenhaConfirma = document.querySelector('#iconeSenhaConfirma');
-
-    alterarTipoTexto(senha, iconeSenha);
-    alterarTipoTexto(senhaConfirma, iconeSenhaConfirma);
-
-    function alterarTipoTexto(texto: any, icone: any) {
-      icone.addEventListener('click', function () {
-        if (texto.type === 'password') {
-          texto.type = 'text';
-          icone.classList.remove('bi-eye-slash');
-          icone.classList.add('bi-eye');
-        } else {
-          texto.type = 'password';
-          icone.classList.remove('bi-eye');
-          icone.classList.add('bi-eye-slash');
-        }
-      });
-    }
-  }
-
   //TODO: implementar validação da senha
   tratarSenha(): void {
     const senha = document.querySelector('#senha') as HTMLInputElement;
@@ -225,10 +161,10 @@ export class CadastroComponent {
           reqIcon[i].classList.add('bi-check');
           reqText[i].style.color = 'var(--verde-principal)';
         } else {
-          reqIcon[i].style.color = 'var(--laranja-secundario)';
+          reqIcon[i].style.color = 'var(--vermelho)';
           reqIcon[i].classList.remove('bi-check');
           reqIcon[i].classList.add('bi-x');
-          reqText[i].style.color = 'var(--laranja-secundario)';
+          reqText[i].style.color = 'var(--vermelho)';
         }
       }
 
@@ -262,10 +198,10 @@ export class CadastroComponent {
       }
 
       if (senha.value !== senhaConfirma.value) {
-        reqConfirma[0].style.color = 'var(--laranja-secundario)';
+        reqConfirma[0].style.color = 'var(--vermelho)';
         reqConfirma[0].classList.remove('bi-check');
         reqConfirma[0].classList.add('bi-x');
-        reqConfirma[1].style.color = 'var(--laranja-secundario)';
+        reqConfirma[1].style.color = 'var(--vermelho)';
       } else {
         reqConfirma.forEach(req => {
           req.style.display = 'none';
@@ -280,8 +216,6 @@ export class CadastroComponent {
     if (!control.root || !(<FormGroup>control.root).controls) {
       return null;
     }
-
-    control.root.get('confirmaSenha')?.updateValueAndValidity();
 
     const isValid = /.{8,}/.test(control.value) &&
     /[A-Z]+/.test(control.value) &&
@@ -309,10 +243,10 @@ export class CadastroComponent {
   }
 
   ngOnInit(): void {
+    this.validarFormatos();
     this.buscarEmpresa();
     this.buscarEndereco();
-    this.validarFormatos();
-    this.formatarCampoSenha();
+    PasswordFormatting.formatarCampoSenha();
     this.tratarSenha();
   }
 
