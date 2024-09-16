@@ -1,0 +1,30 @@
+.faixa {
+    background: var(--verde-degrade);
+}
+
+.link-botao {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.botao-verde {
+    background: var(--verde-degrade);
+}
+
+.fundo-cinza {
+    background-color: var(--cor-de-fundo);
+}
+
+.requirement-text {
+    font-size: 14px;
+    display: none;
+}
+
+.requirement-icon {
+    font-size: 20px;
+    display: none;
+}
+
+.requirement-confirm {
+    display: none;
+}

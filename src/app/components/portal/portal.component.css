@@ -1,0 +1,82 @@
+section {
+    height: 100vh;
+}
+
+.tela {
+    height: 100vh;
+}
+
+.tela {
+    height: 100%;
+}
+
+.logotipo {
+    width: 20%;
+}
+
+div {
+    text-align: center;
+}
+
+.portal_linha {
+    border-left: 1px solid var(--cor-de-fundo);
+}
+
+.portal_botao {
+    color: #fff;
+    background-color: var(--roxo-secundario);
+    border: 1px solid var(--roxo-secundario);
+}
+
+.portal_botao:hover {
+    color: var(--roxo-secundario);
+    background-color: transparent;
+    transition: 0.4s;
+}
+
+.portal_curva {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.portal_curva svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 166px;
+    transform: rotateY(180deg);
+}
+
+.portal_curva .shape-fill {
+    fill: #7633cc;
+}
+
+.portal_curva_baixo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.portal_curva_baixo svg {
+    position: relative;
+    display: block;
+    width: calc(195% + 1.3px);
+    height: 152px;
+}
+
+.portal_curva_baixo .shape-fill {
+    fill: #7633cc;
+}
+
+.empresa_titulo {
+    font-size: 48px;
+}

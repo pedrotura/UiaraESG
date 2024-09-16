@@ -1,0 +1,8 @@
+section {
+    height: 80vh;
+}
+
+.linha {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}

@@ -10,11 +10,11 @@
                 <p class="fs-4 fw-semibold">Preencha os campos abaixo com informações da sua organização. </p>
                 <div class="col-md-4">
                     <label class="form-label" for="cnpj">CNPJ *</label>
-                    <input class="form-control" type="text" formControlName="cnpj" id="cnpj" placeholder="00.000.000/0000-00">
+                    <input class="form-control" type="text" formControlName="cnpj" id="cnpj" maxlength="18" placeholder="00.000.000/0000-00">
                 </div>
                 <div class="col-md-8">
                     <label class="form-label" for="nomeEmpresa">Nome *</label>
-                    <input class="form-control" type="text" formControlName="nomeEmpresa" id="nomeEmpresa" readonly placeholder="Razão social da empresa">
+                    <input class="form-control" type="text" formControlName="nomeEmpresa" id="nomeEmpresa" readonly placeholder="Razão social da organização">
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="receitaBruta">Receita bruta *</label>
@@ -43,7 +43,7 @@
                 <ng-container formGroupName="local">
                     <div class="col-md-3">
                         <label class="form-label" for="cep">CEP *</label>
-                        <input class="form-control" type="text" formControlName="cep" id="cep" placeholder="00000-000">
+                        <input class="form-control" type="text" formControlName="cep" id="cep" maxlength="9" placeholder="00000-000">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="endereco">Endereço *</label>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label" for="numeroEndereco">Número *</label>
-                        <input class="form-control" type="text" formControlName="numeroEndereco" id="numeroEndereco" placeholder="0000">
+                        <input class="form-control" type="text" formControlName="numeroEndereco" id="numeroEndereco" maxlength="4" placeholder="0000">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label" for="complemento">Complemento</label>
@@ -73,12 +73,11 @@
                 <ng-container formGroupName="representante">
                     <div class="col-md-4">
                         <label class="form-label" for="cpf">CPF *</label>
-                        <input class="form-control" id="cpf" type="text" formControlName="cpf" placeholder="000.000.000-00">
+                        <input class="form-control" type="text" formControlName="cpf" id="cpf" maxlength="14" placeholder="000.000.000-00">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label" for="nomeRepresentante">Nome *</label>
-                        <input class="form-control" type="text" formControlName="nomeRepresentante" id="nomeRepresentante"
-                            placeholder="Digite o seu nome">
+                        <input class="form-control" type="text" formControlName="nomeRepresentante" id="nomeRepresentante" placeholder="Digite o seu nome">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label" for="sobrenomeRepresentante">Sobrenome *</label>
@@ -87,7 +86,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="telefone">Telefone *</label>
-                        <input class="form-control" type="text" formControlName="telefone" id="telefone" placeholder="(00) 00000-0000">
+                        <input class="form-control" type="text" formControlName="telefone" id="telefone"  maxlength="15" placeholder="(00) 00000-0000">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="email">E-mail *</label>
@@ -99,19 +98,31 @@
                 <p class="fs-4 fw-semibold">Estamos quase lá. Agora, é necessário adicionar algumas informações sobre o perfil da empresa.</p>
                 <div class="col-md-6">
                     <label class="form-label" for="senha">Senha *</label>
-                    <div class="input-group">
+                    <div class="input-group mb-2">
                         <input class="form-control" id="senha" maxlength="20" type="password" formControlName="senha" required placeholder="Digite a sua senha">
                         <i class="input-group-text bi bi-eye-slash" id="iconeSenha"></i>
                     </div>
+                    <ul class="list-unstyled">
+                        @for(req of requirements; track req.id) {
+                            <li class="requirement d-flex align-items-center text-danger fw-medium">
+                                <i class="bi bi-x requirement-icon mb-1" id="reqIcon{{req.icon}}"></i>
+                                <p class="requirement-text mb-1" id="reqText{{req.id}}">{{req.mensagem}}</p>
+                            </li>
+                        }
+                    </ul>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="senhaConfirma">Confirme a senha *</label>
-                    <div class="input-group">
+                    <div class="input-group mb-2">
                         <input class="form-control" id="senhaConfirma" maxlength="20" type="password" formControlName="senhaConfirma" required placeholder="Digite a sua senha novamente">
                         <i class="input-group-text bi bi-eye-slash" id="iconeSenhaConfirma"></i>
                     </div>
+                    <li class="requirement d-flex align-items-center text-danger fw-medium">
+                        <i class="bi bi-x requirement-icon requirement-confirm mb-1" id="reqIcon4"></i>
+                        <p class="requirement-text requirement-confirm mb-1" id="reqText4">As senhas digitadas não são correspondentes.</p>
+                    </li>
                 </div>
-                <div class="form-check">
+                <div class="form-check mt-0">
                     <input class="form-check-input" id="concordarTermos" type="checkbox" required>
                     <label class="form-check-label" for="concordarTermos">Concordo com os termos de condições do site *</label>
                 </div>
@@ -120,7 +131,7 @@
                     <label class="form-check-label" for="aceitarEmails">Aceito receber e-mails com ofertas e atualizações</label>
                 </div>
                 <div class="col-12 d-flex justify-content-end mt-4">
-                    <button type="submit" class="botao botao_principal botao_formulario" id="btnAvancar">Avançar</button>
+                    <button type="submit" class="btn botao botao_principal botao_formulario" id="btnAvancar">Avançar</button>
                 </div>
             </form>
         </div>

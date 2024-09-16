@@ -18,6 +18,12 @@ import { Router } from '@angular/router';
 export class CadastroComponent {
 
   empresa: Empresa = {};
+  requirements: Array<any> = [
+    { id: 1, mensagem: 'A sua senha deve conter ao menos 8 caracteres', padrao: /.{8,}/ },
+    { id: 2, mensagem: 'Digite pelo menos 1 letra maiúscula', padrao: /[A-Z]+/ },
+    { id: 3, mensagem: 'Digite pelo menos 1 número', padrao: /\d+/ },
+    { id: 4, mensagem: 'Digite pelo menos 1 caractere especial', padrao: /[$&+,:;=?@#|'<>.^*()%!-]+/ },
+  ];
   cadastroForm: FormGroup;
 
   constructor (private cadastroService: CadastroService, private formBuilder: FormBuilder, private router: Router) {
@@ -41,9 +47,10 @@ export class CadastroComponent {
         telefone: ['', [Validators.required, Validators.maxLength(15)]],
         email: ['', [Validators.required, Validators.email]]
       }),
-      senha: ['', Validators.required],
+      senha: ['', [Validators.required, this.senhaValidator]],
       senhaConfirma: ['', Validators.required]
-    });
+    }, { validators: this.senhaConfirmaValidator }
+  );
   }
   
   validarFormatos(): void {
@@ -112,6 +119,10 @@ export class CadastroComponent {
             nomeEmpresa: data['RAZAO SOCIAL'] || ''
           });
         });
+      } else {
+        this.cadastroForm.patchValue({
+          nomeEmpresa: ''
+        });
       }
     });
   }
@@ -134,14 +145,20 @@ export class CadastroComponent {
               estado: data.estado || ''
             }
           });
-
+        });
+      } else {
+        this.cadastroForm.patchValue({
+          local: {
+            endereco: '',
+            cidade: '',
+            estado: ''
+          }
         });
       }
     });
   }
 
-  //TODO: implementar validação da senha
-  validarSenha(): void {
+  formatarCampoSenha(): void {
 
     const senha = document.querySelector('#senha');
     const iconeSenha = document.querySelector('#iconeSenha');
@@ -152,9 +169,9 @@ export class CadastroComponent {
     alterarTipoTexto(senha, iconeSenha);
     alterarTipoTexto(senhaConfirma, iconeSenhaConfirma);
 
-    function alterarTipoTexto(icone: any, texto: any) {
+    function alterarTipoTexto(texto: any, icone: any) {
       icone.addEventListener('click', function () {
-        if (texto.type == 'password') {
+        if (texto.type === 'password') {
           texto.type = 'text';
           icone.classList.remove('bi-eye-slash');
           icone.classList.add('bi-eye');
@@ -167,18 +184,143 @@ export class CadastroComponent {
     }
   }
 
+  //TODO: implementar validação da senha
+  tratarSenha(): void {
+    const senha = document.querySelector('#senha') as HTMLInputElement;
+    const reqIcon = document.querySelectorAll('.requirement-icon') as NodeListOf<HTMLElement>;
+    const reqText = document.querySelectorAll('.requirement-text') as NodeListOf<HTMLElement>;
+
+    senha.addEventListener('input', () => {
+      
+      reqIcon.forEach(req => {
+        if (!req.classList.contains('requirement-confirm')) {
+          req.style.display = 'block';
+        }
+      });
+
+      reqText.forEach(req => {
+        if (!req.classList.contains('requirement-confirm')) {
+          req.style.display = 'block';
+        }
+      });
+
+      if (senha.value === '' || senha.value == null) {
+        reqIcon.forEach(req => {
+          if (!req.classList.contains('requirement-confirm')) {
+            req.style.display = 'none';
+          }
+        });
+
+        reqText.forEach(req => {
+          if (!req.classList.contains('requirement-confirm')) {
+            req.style.display = 'none';
+          }
+        });
+      }
+
+      for (let i = 0; i < this.requirements.length; i++) {
+        if (this.requirements[i].padrao.test(senha.value)) {
+          reqIcon[i].style.color = 'var(--verde-principal)';
+          reqIcon[i].classList.remove('bi-x');
+          reqIcon[i].classList.add('bi-check');
+          reqText[i].style.color = 'var(--verde-principal)';
+        } else {
+          reqIcon[i].style.color = 'var(--laranja-secundario)';
+          reqIcon[i].classList.remove('bi-check');
+          reqIcon[i].classList.add('bi-x');
+          reqText[i].style.color = 'var(--laranja-secundario)';
+        }
+      }
+
+      if (senhaConfirma.value !== '') {
+        if (senha.value === senhaConfirma.value) {
+          reqConfirma.forEach(req => {
+            req.style.display = 'none';
+          });
+        } else {
+          reqConfirma.forEach(req => {
+            req.style.display = 'block';
+          });
+        }
+      }
+
+    });
+
+    const senhaConfirma = document.querySelector('#senhaConfirma') as HTMLInputElement;
+    const reqConfirma = document.querySelectorAll('.requirement-confirm') as NodeListOf<HTMLElement>;
+
+    senhaConfirma.addEventListener('input', () => {
+
+      reqConfirma.forEach(req => {
+        req.style.display = 'block';
+      });
+
+      if (senhaConfirma.value === '' || senhaConfirma.value == null) {
+        reqConfirma.forEach(req => {
+          req.style.display = 'none';
+        });
+      }
+
+      if (senha.value !== senhaConfirma.value) {
+        reqConfirma[0].style.color = 'var(--laranja-secundario)';
+        reqConfirma[0].classList.remove('bi-check');
+        reqConfirma[0].classList.add('bi-x');
+        reqConfirma[1].style.color = 'var(--laranja-secundario)';
+      } else {
+        reqConfirma.forEach(req => {
+          req.style.display = 'none';
+        });
+      }
+    });
+
+  }
+
+  senhaValidator(control: FormControl) {
+
+    if (!control.root || !(<FormGroup>control.root).controls) {
+      return null;
+    }
+
+    control.root.get('confirmaSenha')?.updateValueAndValidity();
+
+    const isValid = /.{8,}/.test(control.value) &&
+    /[A-Z]+/.test(control.value) &&
+    /\d+/.test(control.value) &&
+    /[$&+,:;=?@#|'<>.^*()%!-]+/.test(control.value);
+    
+    return isValid ? null : { required: true }; 
+
+  }
+
+  senhaConfirmaValidator(form: FormGroup) {
+
+    const senha = form.get('senha')?.value;
+    const senhaConfirma = form.get('senhaConfirma')?.value;
+
+    if (!form || !form.controls) {
+      return null;
+    }
+
+    if (senha !== senhaConfirma) {
+      return { required: true }
+    }
+    return null;
+
+  }
+
   ngOnInit(): void {
     this.buscarEmpresa();
     this.buscarEndereco();
     this.validarFormatos();
-    this.validarSenha();
+    this.formatarCampoSenha();
+    this.tratarSenha();
   }
 
   //TODO: enviar dados do formulário para o servidor
   onSubmit(): void {
     alert('Formulário enviadoo :3');
     alert(this.cadastroForm.valid);
-    console.log(this.cadastroForm);
+    console.log(this.cadastroForm.controls);
     if (this.cadastroForm.valid) {
       this.router.navigate(['/perguntas']);
     }

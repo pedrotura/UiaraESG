@@ -1,0 +1,15 @@
+.principal {
+    height: 100vh;
+    background-image: url(../../../assets/images/fundo_principal.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    margin: 0;
+    padding: 0 3%;
+}
+
+.principal div {
+    width: 50%;
+    text-align: center;
+    color: var(--cor-de-fundo);
+}
