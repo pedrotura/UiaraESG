@@ -21,7 +21,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: var(--fonte-principal);
 }
 
@@ -30,7 +29,6 @@ html {
 }
 
 body {
-    overflow-x: hidden;
     background-color: var(--cor-de-fundo);
 }
 
@@ -42,6 +40,10 @@ header {
 
 .resize {
     width: 20vw;
+}
+
+.tela {
+    height: 100vh;
 }
 
 .fundo_imagem {

@@ -1,16 +1,23 @@
-<main class="row">
-<div class="col-md-7 faixa"></div>
-<div class="container bg-light col-md-5 d-flex flex-column justify-content-center align-items-center">
-    <img class="mb-3" src="assets/images/logotipo2.png" alt="">
-    <form class="form-margem" [formGroup]="resetForm" (ngSubmit)="onSubmit()" id="resetForm">
-        <h1 class="h1">Recupere sua conta.</h1>
-        <div class="my-3">
-            <label class="form-label" for="email">E-mail *</label>
-            <input class="form-control" type="email" formControlName="email" id="email" placeholder="exemplo@email.com">
+<main class="overflow-hidden">
+    <section class="main row">
+        <div class="col-md-7 faixa"></div>
+        <div class="main bg-light col-md-5 d-flex flex-column justify-content-center align-items-center">
+            <img class="mb-3" src="assets/images/logotipo2.png" alt="">
+            <form class="form-margem" [formGroup]="resetForm" (ngSubmit)="onSubmit()" id="resetForm">
+                <div>
+                    <h1 class="h1">Recupere sua conta.</h1>
+                </div>
+                <div class="my-3">
+                    <label class="form-label" for="email">E-mail *</label>
+                    <input class="form-control" type="email" formControlName="email" id="email"
+                        placeholder="exemplo@email.com">
+                </div>
+                <p class="form-text">Digite o e-mail vinculado à sua conta para enviarmos um código de verificação.</p>
+                <button type="submit" class="btn botao botao_principal botao_formulario mb-2" id="btnEntrar"
+                    [disabled]="!resetForm.valid">Entrar</button>
+                <p class="form-text">Não possui uma conta? <span><a class="login-span text-decoration-none fw-bolder"
+                            href="/cadastro">Registre-se.</a></span></p>
+            </form>
         </div>
-        <p class="form-text">Digite o e-mail vinculado à sua conta para enviarmos um código de verificação.</p>
-        <button type="submit" class="btn botao botao_principal botao_formulario mb-2" id="btnEntrar" [disabled]="!resetForm.valid">Entrar</button>
-        <p class="form-text">Não possui uma conta? <span><a class="login-span text-decoration-none fw-bolder" href="/cadastro">Registre-se.</a></span></p>
-    </form>
-</div>
+    </section>
 </main>

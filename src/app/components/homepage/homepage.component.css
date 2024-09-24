@@ -1,15 +1,39 @@
 .principal {
     height: 100vh;
-    background-image: url(../../../assets/images/fundo_principal.jpg);
-    background-size: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(../../../assets/images/fundo_principal.jpg);
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.5) inset;
+    background-size: cover;
     background-repeat: no-repeat;
-    object-fit: cover;
-    margin: 0;
-    padding: 0 3%;
+    object-fit: contain;
 }
 
-.principal div {
-    width: 50%;
+.blurry {
+    height: 100vh;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.home-text {
     text-align: center;
     color: var(--cor-de-fundo);
+}
+
+@media screen and (max-width: 1300px) {
+    .principal {
+        box-shadow: none;
+        background-image: none;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .home-text {
+        color: var(--preto);
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 835px) {
+    .home-text {
+        width: 85%;
+    }
 }

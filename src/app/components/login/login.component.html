@@ -1,25 +1,34 @@
-<main class="row">
-    <div class="col-md-7 faixa"></div>
-    <div class="container bg-light col-md-5 d-flex flex-column justify-content-center align-items-center">
-        <img class="mb-3" src="assets/images/logotipo2.png" alt="">
-        <form class="form-margem" [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
-            <h1 class="h1">Bem-vindo de volta.</h1>
-            <div class="my-3">
-                <label class="form-label" for="cnpj">CNPJ</label>
-                <input class="form-control" type="text" formControlName="cnpj" id="cnpj" maxlength="18" placeholder="00.000.000/0000-00">
+<main class="overflow-hidden">
+    <section class="row">
+        <div class="col-md-7 faixa"></div>
+        <div class="main bg-light col-md-5 d-flex flex-column justify-content-center align-items-center">
+            <div class="form-image d-flex justify-content-center">
+                <img class="mb-3" src="assets/images/logotipo2.png" alt="">
             </div>
-            <div class="my-3">
-                <label class="form-label" for="senha">Senha *</label>
-                <div class="input-group mb-2">
-                    <input class="form-control senha" id="senha" maxlength="20" type="password" formControlName="senha" placeholder="Digite a sua senha">
-                    <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenha"></i>
+            <form class="form-margem" [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
+                <h1 class="h1">Bem-vindo de volta.</h1>
+                <div class="my-3">
+                    <label class="form-label" for="cnpj">CNPJ *</label>
+                    <input class="form-control" type="text" formControlName="cnpj" id="cnpj" maxlength="18"
+                        placeholder="00.000.000/0000-00">
                 </div>
-                <div class="col-12 d-flex justify-content-end">
-                    <a class="form-text login-span text-decoration-none fw-bolder" href="/senha-reset">Esqueceu a senha?</a>
+                <div class="my-3">
+                    <label class="form-label" for="senha">Senha *</label>
+                    <div class="input-group mb-2">
+                        <input class="form-control senha" id="senha" maxlength="20" type="password"
+                            formControlName="senha" placeholder="Digite a sua senha">
+                        <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenha"></i>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end">
+                        <a class="form-text login-span text-decoration-none fw-bolder" href="/senha-reset">Esqueceu a
+                            senha?</a>
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn botao botao_principal botao_formulario mb-2" id="btnEntrar" [disabled]="!loginForm.valid">Entrar</button>
-            <p class="form-text">Não possui uma conta? <span><a class="login-span text-decoration-none fw-bolder" href="/cadastro">Registre-se.</a></span></p>
-        </form>
-    </div>
+                <button type="submit" class="btn botao botao_principal botao_formulario mb-2" id="btnEntrar"
+                    [disabled]="!loginForm.valid">Entrar</button>
+                <p class="form-text">Não possui uma conta? <span><a class="login-span text-decoration-none fw-bolder"
+                            href="/cadastro">Registre-se.</a></span></p>
+            </form>
+        </div>
+    </section>
 </main>

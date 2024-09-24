@@ -3,12 +3,8 @@
     color: #ffffff;
 }
 
-.botao-verde {
-    background: var(--verde-degrade);
-}
-
-.fundo-cinza {
-    background-color: var(--cor-de-fundo);
+.form-div {
+    width: 80%;
 }
 
 .requirement-text {
@@ -23,4 +19,20 @@
 
 .requirement-confirm {
     display: none;
+}
+
+@media screen and (max-width: 1325px) {
+    .form-div {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1055px) {
+    .faixa {
+        display: none;
+    }
+
+    .main {
+        width: 100%;
+    }
 }

@@ -1,0 +1,19 @@
+.form-div {
+    width: 80%;
+}
+
+@media screen and (max-width: 1325px) {
+    .form-div {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1055px) {
+    .faixa {
+        display: none;
+    }
+
+    .main {
+        width: 100%;
+    }
+}

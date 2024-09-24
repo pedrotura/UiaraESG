@@ -1,4 +1,4 @@
-main {
+.main {
     height: 100vh;
 }
 
@@ -8,11 +8,7 @@ button {
 }
 
 img {
-    width: 40%;
-}
-
-.form-margem {
-    padding: 0 6.5em;
+    width: 15em;
 }
 
 .login-span {
@@ -22,4 +18,14 @@ img {
 .login-span:hover {
     color: #0957aa;
     transition: .2s;
+}
+
+@media screen and (max-width: 950px) {
+    .faixa {
+        display: none;
+    }
+
+    .main {
+        width: 100%;
+    }
 }

@@ -1,3 +1,7 @@
+.titulo {
+    font-size: 4em;
+}
+
 section {
     height: 100vh;
 }
@@ -10,7 +14,7 @@ section {
     div {
         width: 85%;
     }
-    
+
     .titulo {
         font-size: calc(1.325rem + .9vw);
     }
