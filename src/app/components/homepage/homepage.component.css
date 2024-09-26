@@ -1,4 +1,4 @@
-.principal {
+.main {
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(../../../assets/images/fundo_principal.jpg);
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.5) inset;
@@ -19,7 +19,7 @@
 }
 
 @media screen and (max-width: 1300px) {
-    .principal {
+    .main {
         box-shadow: none;
         background-image: none;
         display: flex;

@@ -2,7 +2,7 @@ section {
     height: 100vh;
 }
 
-.texto {
+.text {
     font-size: calc(1.275rem + .3vw);
 }
 
@@ -11,11 +11,11 @@ section {
         width: 85%;
     }
     
-    .titulo {
+    .title {
         font-size: calc(1.325rem + .9vw);
     }
 
-    .texto {
+    .text {
         font-size: unset;
     }
 }

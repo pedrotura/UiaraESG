@@ -1,9 +1,9 @@
-.menu_link {
+.menu-link {
     font-size: 18px;
     color: var(--cor-de-fundo);
 }
 
-.menu_link:hover {
+.menu-link:hover {
     color: var(--branco);
     transition: 0.2s;
 }

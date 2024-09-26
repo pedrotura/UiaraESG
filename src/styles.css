@@ -38,15 +38,21 @@ header {
     padding: 0 0.75em;
 }
 
-.resize {
-    width: 20vw;
-}
-
-.tela {
+.screen-size {
     height: 100vh;
 }
 
-.fundo_imagem {
+.title {
+    font-size: 48px;
+}
+
+.text {
+    line-height: 32px;
+    margin: 20px 0;
+}
+
+/*classe global devido ao caminho da imagem*/
+.bg-image {
     background-image: url(assets/images/fundo.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
@@ -54,62 +60,38 @@ header {
     margin: 0;
 }
 
-.form {
-    padding: 3% 5%;
-    border-radius: 6px;
-    box-shadow: 0 0 12px 0 #afafaf;
-}
-
-.titulo {
-    font-size: 48px;
-}
-
-.texto {
-    line-height: 32px;
-    margin: 20px 0;
-}
-
-.botao {
+.button {
+    color: #fff;
+    background-color: var(--verde-principal);
+    border: 1px solid var(--verde-principal);
     font-weight: 600;
     border-radius: 8px;
     padding: 0.5em 1.5em;
 }
 
-.botao_principal {
-    color: #fff;
-    background-color: var(--verde-principal);
-    border: 1px solid var(--verde-principal);
-}
-
-.botao_principal:hover {
+.main-button:hover {
     cursor: pointer;
     background-color: transparent;
     border: 1px solid var(--verde-principal);
     transition: 0.2s;
 }
 
-
-.botao_formulario:hover {
+.form-button:hover {
     color: var(--branco);
     background-color: #04a978;
     border-color: #04a978;
     transition: 0.4s;
 }
 
+.large-button {
+    width: 100%;
+    padding: 0.6em 1.5em;
+}
+
 .text-justify {
     text-align: justify;
 }
 
-.imagem {
-    width: 40%;
-    object-fit: fill;
-    border-left: 1px solid #ccc;
-}
-
-.teste {
-    width: 80%;
-}
-
-.faixa {
+.strip {
     background: var(--verde-degrade);
 }

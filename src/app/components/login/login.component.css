@@ -2,11 +2,6 @@
     height: 100vh;
 }
 
-button {
-    width: 100%;
-    padding: 0.6em 1.5em;
-}
-
 .form-image {
     width: 100%;
 }
@@ -25,7 +20,7 @@ img {
 }
 
 @media screen and (max-width: 950px) {
-    .faixa {
+    .strip {
         display: none;
     }
 

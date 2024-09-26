@@ -2,15 +2,7 @@ section {
     height: 100vh;
 }
 
-.tela {
-    height: 100vh;
-}
-
-.tela {
-    height: 100%;
-}
-
-.logotipo {
+.logo {
     width: 20%;
 }
 
@@ -18,23 +10,23 @@ div {
     text-align: center;
 }
 
-.portal_linha {
+.hub-line {
     border-left: 1px solid var(--cor-de-fundo);
 }
 
-.portal_botao {
+.hub-button {
     color: #fff;
     background-color: var(--roxo-secundario);
     border: 1px solid var(--roxo-secundario);
 }
 
-.portal_botao:hover {
+.hub-button:hover {
     color: var(--roxo-secundario);
     background-color: transparent;
     transition: 0.4s;
 }
 
-.portal_curva {
+.upper-hub-curve {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +36,7 @@ div {
     transform: rotate(180deg);
 }
 
-.portal_curva svg {
+.upper-hub-curve svg {
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
@@ -52,11 +44,11 @@ div {
     transform: rotateY(180deg);
 }
 
-.portal_curva .shape-fill {
+.upper-hub-curve .shape-fill {
     fill: #7633cc;
 }
 
-.portal_curva_baixo {
+.lower-hub-curve {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -66,17 +58,33 @@ div {
     transform: rotate(180deg);
 }
 
-.portal_curva_baixo svg {
+.lower-hub-curve svg {
     position: relative;
     display: block;
     width: calc(195% + 1.3px);
     height: 152px;
 }
 
-.portal_curva_baixo .shape-fill {
+.lower-hub-curve .shape-fill {
     fill: #7633cc;
 }
 
 .empresa_titulo {
     font-size: 48px;
+}
+
+@media screen and (max-width: 1000px) {
+    .portal-text {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 835px) {
+    .logo {
+        width: 40%;
+    }
+
+    .portal-text {
+        width: 85%;
+    }
 }

@@ -51,3 +51,9 @@ ul {
     color: var(--branco);
     transition: .2s;
 }
+
+@media screen and (max-width: 450px) {   
+    .footer-text, .footer-link {
+        font-size: 11px;
+    }
+}
