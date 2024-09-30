@@ -78,6 +78,10 @@ div {
 }
 
 @media screen and (max-width: 1000px) {
+    .upper-hub-curve, .lower-hub-curve {
+        display: none;
+    }
+    
     .portal-text {
         width: 70%;
     }
