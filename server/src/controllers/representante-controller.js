@@ -1,4 +1,4 @@
-const repository = require('../repositories/empresa-repository.js');
+const repository = require('../repositories/representante-repository.js');
 
 exports.get = async (req, res) => {
     try {

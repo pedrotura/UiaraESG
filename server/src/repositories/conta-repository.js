@@ -21,7 +21,7 @@ const conectar = async () => {
 exports.get = async () => {
     try {
         const con = await conectar();
-        const [results, fields] = await con.query('SELECT * FROM fornecedores');
+        const [results, fields] = await con.query('SELECT * FROM contas');
         return results;
     } catch (err) {
         throw err;
@@ -31,8 +31,8 @@ exports.get = async () => {
 exports.create = async (data) => {
     try {
         const con = await conectar();
-        con.query('INSERT INTO fornecedores VALUES(?, ?, ?, ?, ?, ?, ?)',
-            [data.cnpj, data.nome_empresa, data.receita_bruta, data.receita_liquida, data.qtd_empregados, data.cpf_representante, data.id_local]);
+        con.query('INSERT INTO contas VALUES(?, ?, ?, ?, ?)',
+            [data.id_conta, data.nome_usuario, data.email, data.senha, data.cnpj_fornecedor]);
     } catch (err) {
         throw err;
     }
@@ -41,8 +41,8 @@ exports.create = async (data) => {
 exports.update = async (id, data) => {
     try {
         const con = await conectar();
-        con.query('UPDATE fornecedores SET nome_empresa = ?, receita_bruta = ?, receita_liquida = ?, qtd_empregados = ?, cpf_representante = ?, id_local = ? WHERE cnpj = ?',
-            [data.nome_empresa, data.receita_bruta, data.receita_liquida, data.qtd_empregados, data.cpf_representante, data.id_local, data.cnpj]);
+        con.query('UPDATE contas SET nome_usuario = ?, email = ?, senha = ?, cnpj_fornecedor = ? WHERE id_conta = ?',
+            [data.nome_usuario, data.email, data.senha, data.cnpj_fornecedor, data.id_conta]);
     } catch (err) {
         throw err;
     }

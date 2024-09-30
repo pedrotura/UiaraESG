@@ -1,5 +1,9 @@
-section {
+main {
     height: 100vh;
+}
+
+section {
+    height: 100%;
 }
 
 .logo {

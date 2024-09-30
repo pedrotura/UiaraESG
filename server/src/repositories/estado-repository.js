@@ -21,28 +21,8 @@ const conectar = async () => {
 exports.get = async () => {
     try {
         const con = await conectar();
-        const [results, fields] = await con.query('SELECT * FROM fornecedores');
+        const [results, fields] = await con.query('SELECT * FROM estados');
         return results;
-    } catch (err) {
-        throw err;
-    }
-}
-
-exports.create = async (data) => {
-    try {
-        const con = await conectar();
-        con.query('INSERT INTO fornecedores VALUES(?, ?, ?, ?, ?, ?, ?)',
-            [data.cnpj, data.nome_empresa, data.receita_bruta, data.receita_liquida, data.qtd_empregados, data.cpf_representante, data.id_local]);
-    } catch (err) {
-        throw err;
-    }
-}
-
-exports.update = async (id, data) => {
-    try {
-        const con = await conectar();
-        con.query('UPDATE fornecedores SET nome_empresa = ?, receita_bruta = ?, receita_liquida = ?, qtd_empregados = ?, cpf_representante = ?, id_local = ? WHERE cnpj = ?',
-            [data.nome_empresa, data.receita_bruta, data.receita_liquida, data.qtd_empregados, data.cpf_representante, data.id_local, data.cnpj]);
     } catch (err) {
         throw err;
     }
