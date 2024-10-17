@@ -30,9 +30,15 @@ exports.get = async () => {
 
 exports.create = async (data) => {
     try {
+
+        const cpf = data.representante.cpf
+            .replace(/\D/g, "");
+        const telefone = data.representante.telefone
+            .replace(/\D/g, "");
+
         const con = await conectar();
-        con.query('INSERT INTO representantes VALUES(?, ?, ?)',
-            [data.cpf, data.nome, data.sobrenome]);
+        con.query('INSERT INTO representantes VALUES(?, ?, ?, ?)',
+            [cpf, data.representante.nomeRepresentante, data.representante.sobrenomeRepresentante, telefone]);
     } catch (err) {
         throw err;
     }
@@ -42,7 +48,7 @@ exports.update = async (id, data) => {
     try {
         const con = await conectar();
         con.query('UPDATE representantes SET nome = ?, sobrenome = ? WHERE cpf = ?',
-            [data.nome, data.sobrenome, data.cpf]);
+            [data.nome, data.sobrenome, data.cp]);
     } catch (err) {
         throw err;
     }

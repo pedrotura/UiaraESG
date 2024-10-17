@@ -30,9 +30,13 @@ exports.get = async () => {
 
 exports.create = async (data) => {
     try {
+
+        const cnpj = data.cnpj
+            .replace(/\D/g, "");
+
         const con = await conectar();
-        con.query('INSERT INTO contas VALUES(?, ?, ?, ?, ?)',
-            [data.id_conta, data.nome_usuario, data.email, data.senha, data.cnpj_fornecedor]);
+        con.query('INSERT INTO contas(nome_usuario, email, senha, cnpj_fornecedor) VALUES(?, ?, ?, ?)',
+            [data.conta.nomeUsuario, data.conta.email, data.conta.senha, cnpj]);
     } catch (err) {
         throw err;
     }

@@ -1,4 +1,5 @@
 const repository = require('../repositories/empresa-repository.js');
+const local_repository = require('../repositories/local-repository.js');
 
 exports.get = async (req, res) => {
     try {
@@ -11,7 +12,8 @@ exports.get = async (req, res) => {
 
 exports.post = async (req, res) => {
     try {
-        await repository.create(req.body);
+        const local = await local_repository.get(req.body);
+        await repository.create(req.body, local);
         return res.status(201).send({ mensagem: 'Valor inserido com sucesso.' });
     } catch (err) {
         res.status(500).send({ mensagem: 'Erro ao inserir valor.' });

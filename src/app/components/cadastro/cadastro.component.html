@@ -23,24 +23,24 @@
                         <label class="form-label" for="receitaBruta">Receita bruta *</label>
                         <select class="form-select" formControlName="receitaBruta" id="receitaBruta">
                             <option value="">Selecione a receita bruta</option>
-                            <option value="receita0">Até R$ 500.000,00</option>
-                            <option value="receita1">R$ 500.000,00 - R$ 1.000.000,00</option>
-                            <option value="receita2">R$ 1.000.000,00 - R$ 1.500.000,00</option>
-                            <option value="receita3">R$ 1.500.000,00 - R$ 2.000.000,00</option>
-                            <option value="receita4">R$ 2.000.000,00 - R$ 2.500.000,00</option>
-                            <option value="receita5">R$ 2.500.000,00 - R$ 3.000.000,00</option>
-                            <option value="receita6">Superior a R$ 3.000.000,00</option>
+                            <option value="Até R$ 500.000,00">Até R$ 500.000,00</option>
+                            <option value="R$ 500.000,00 - R$ 1.000.000,00">R$ 500.000,00 - R$ 1.000.000,00</option>
+                            <option value="R$ 1.000.000,00 - R$ 1.500.000,00">R$ 1.000.000,00 - R$ 1.500.000,00</option>
+                            <option value="R$ 1.500.000,00 - R$ 2.000.000,00">R$ 1.500.000,00 - R$ 2.000.000,00</option>
+                            <option value="R$ 2.000.000,00 - R$ 2.500.000,00">R$ 2.000.000,00 - R$ 2.500.000,00</option>
+                            <option value="R$ 2.500.000,00 - R$ 3.000.000,00">R$ 2.500.000,00 - R$ 3.000.000,00</option>
+                            <option value="Superior a R$ 3.000.000,00">Superior a R$ 3.000.000,00</option>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="qtdEmpregados">Quantidade de empregados *</label>
                         <select class="form-select" formControlName="qtdEmpregados" id="qtdEmpregados">
                             <option value="">Selecione a quantidade de empregados</option>
-                            <option value="quantidade0">Até 20</option>
-                            <option value="quantidade1">20 - 100</option>
-                            <option value="quantidade2">101 - 500</option>
-                            <option value="quantidade3">501 - 1000</option>
-                            <option value="quantidade4">Superior a 1000</option>
+                            <option value="Até 20">Até 20</option>
+                            <option value="20 - 100">20 - 100</option>
+                            <option value="101 - 500">101 - 500</option>
+                            <option value="501 - 1000">501 - 1000</option>
+                            <option value="Superior a 1000">Superior a 1000</option>
                         </select>
                     </div>
                     <ng-container formGroupName="local">
@@ -79,20 +79,10 @@
                     <p class="fs-4 fw-semibold">As organizações registradas em nosso sistema precisam de um
                         representante legal. Complete o cadastro a seguir.</p>
                     <ng-container formGroupName="representante">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label" for="cpf">CPF *</label>
                             <input class="form-control" type="text" formControlName="cpf" id="cpf" maxlength="14"
                                 placeholder="000.000.000-00">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label" for="nomeRepresentante">Nome *</label>
-                            <input class="form-control" type="text" formControlName="nomeRepresentante"
-                                id="nomeRepresentante" placeholder="Digite o seu nome">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label" for="sobrenomeRepresentante">Sobrenome *</label>
-                            <input class="form-control" type="text" formControlName="sobrenomeRepresentante"
-                                id="sobrenomeRepresentante" placeholder="Digite o seu sobrenome">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="telefone">Telefone *</label>
@@ -100,58 +90,71 @@
                                 maxlength="15" placeholder="(00) 00000-0000">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="email">E-mail *</label>
-                            <input class="form-control" type="email" formControlName="email" id="email"
-                                placeholder="exemplo@email.com">
+                            <label class="form-label" for="nomeRepresentante">Nome *</label>
+                            <input class="form-control" type="text" formControlName="nomeRepresentante" id="nomeRepresentante"
+                                placeholder="Digite o seu nome">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="sobrenomeRepresentante">Sobrenome *</label>
+                            <input class="form-control" type="text" formControlName="sobrenomeRepresentante" id="sobrenomeRepresentante"
+                                placeholder="Digite o seu sobrenome">
                         </div>
                         <p class="form-text">Lembre-se de adicionar o DDD.</p>
                     </ng-container>
                     <h2 class="fs-1 fw-bolder">Dados de login</h2>
                     <p class="fs-4 fw-semibold">Estamos quase lá. Agora, é necessário adicionar algumas informações
                         sobre o perfil da empresa.</p>
-                    <div class="col-md-6">
-                        <label class="form-label" for="senha">Senha *</label>
-                        <div class="input-group mb-2">
-                            <input class="form-control senha" id="senha" maxlength="20" type="password"
-                                formControlName="senha" placeholder="Digite a sua senha">
-                            <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenha"></i>
+                    <ng-container formGroupName="conta">
+                        <div class="col-md-5">
+                            <label class="form-label" for="nomeUsuario">Nome de usuário *</label>
+                            <input class="form-control" type="text" formControlName="nomeUsuario" id="nomeUsuario" maxlength="25" placeholder="Digite o nome do seu perfil">
                         </div>
-                        <ul class="list-unstyled">
-                            @for(req of requirements; track req.id) {
+                        <div class="col-md-7">
+                            <label class="form-label" for="email">E-mail *</label>
+                            <input class="form-control" type="email" formControlName="email" id="email" placeholder="exemplo@email.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="senha">Senha *</label>
+                            <div class="input-group mb-2">
+                                <input class="form-control senha" id="senha" maxlength="20" type="password" formControlName="senha"
+                                    placeholder="Digite a sua senha">
+                                <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenha"></i>
+                            </div>
+                            <ul class="list-unstyled">
+                                @for(req of requirements; track req.id) {
+                                <li class="requirement d-flex align-items-center text-danger fw-medium">
+                                    <i class="bi bi-x requirement-icon mb-1" id="reqIcon{{req.icon}}"></i>
+                                    <p class="requirement-text mb-1" id="reqText{{req.id}}">{{req.mensagem}}</p>
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="senhaConfirma">Confirme a senha *</label>
+                            <div class="input-group mb-2">
+                                <input class="form-control senha" id="senhaConfirma" maxlength="20" type="password"
+                                    formControlName="senhaConfirma" placeholder="Digite a sua senha novamente">
+                                <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenhaConfirma"></i>
+                            </div>
                             <li class="requirement d-flex align-items-center text-danger fw-medium">
-                                <i class="bi bi-x requirement-icon mb-1" id="reqIcon{{req.icon}}"></i>
-                                <p class="requirement-text mb-1" id="reqText{{req.id}}">{{req.mensagem}}</p>
+                                <i class="bi bi-x requirement-icon requirement-confirm mb-1" id="reqIcon4"></i>
+                                <p class="requirement-text requirement-confirm mb-1" id="reqText4">As senhas digitadas não
+                                    são correspondentes.</p>
                             </li>
-                            }
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="senhaConfirma">Confirme a senha *</label>
-                        <div class="input-group mb-2">
-                            <input class="form-control senha" id="senhaConfirma" maxlength="20" type="password"
-                                formControlName="senhaConfirma" placeholder="Digite a sua senha novamente">
-                            <i class="input-group-text bi bi-eye-slash senha-icone" id="iconeSenhaConfirma"></i>
                         </div>
-                        <li class="requirement d-flex align-items-center text-danger fw-medium">
-                            <i class="bi bi-x requirement-icon requirement-confirm mb-1" id="reqIcon4"></i>
-                            <p class="requirement-text requirement-confirm mb-1" id="reqText4">As senhas digitadas não
-                                são correspondentes.</p>
-                        </li>
-                    </div>
-                    <div class="form-check mt-0">
-                        <label class="form-check-label" for="concordarTermos">
-                            <input class="form-check-input" id="concordarTermos" type="checkbox"
-                                formControlName="concordarTermos">
-                            Concordo com os termos de condições do site *
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label" for="aceitarEmails">
-                            <input class="form-check-input" id="aceitarEmails" type="checkbox"
-                                formControlName="aceitarEmails">
-                            Aceito receber e-mails com ofertas e atualizações
-                        </label>
-                    </div>
+                        <div class="form-check mt-0">
+                            <label class="form-check-label" for="concordarTermos">
+                                <input class="form-check-input" id="concordarTermos" type="checkbox" formControlName="concordarTermos">
+                                Concordo com os termos de condições do site *
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="aceitarEmails">
+                                <input class="form-check-input" id="aceitarEmails" type="checkbox" formControlName="aceitarEmails">
+                                Aceito receber e-mails com ofertas e atualizações
+                            </label>
+                        </div>
+                    </ng-container>
                     <div class="col-12 d-flex justify-content-end mt-4">
                         <button type="submit" class="btn button form-button" id="btnAvancar"
                             [disabled]="!cadastroForm.valid">Avançar</button>

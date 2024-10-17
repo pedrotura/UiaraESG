@@ -18,11 +18,17 @@ const conectar = async () => {
     }
 }
 
-exports.get = async () => {
+exports.get = async (data) => {
     try {
+        let endereco = `${data.local.endereco}, ${data.local.numeroEndereco}`;
+
+        if (data.local.complemento) {
+            endereco += `, ${data.local.complemento}`;
+        }
+
         const con = await conectar();
-        const [results, fields] = await con.query('SELECT * FROM locais');
-        return results;
+        const [results, fields] = await con.query('SELECT id_local FROM locais WHERE endereco = ?', [endereco]);
+        return results[0].id_local;
     } catch (err) {
         throw err;
     }
@@ -30,9 +36,18 @@ exports.get = async () => {
 
 exports.create = async (data) => {
     try {
+        let endereco = `${data.local.endereco}, ${data.local.numeroEndereco}`;
+
+        if (data.local.complemento) {
+            endereco += `, ${data.local.complemento}`;
+        }
+
+        const cep = data.local.cep
+            .replace(/\-/, "");
+
         const con = await conectar();
-        con.query('INSERT INTO locais VALUES(?, ?, ?, ?)',
-            [data.id_local, data.endereco, data.cidade, data.id_estado]);
+        con.query('INSERT INTO locais(cep, endereco, cidade, id_estado) VALUES(?, ?, ?, ?)',
+            [cep, endereco, data.local.cidade, data.local.estado]);
     } catch (err) {
         throw err;
     }

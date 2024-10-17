@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegexValidations, PasswordFormatting } from '../../shared/form-utilities';
-import { CadastroService } from '../../services/cadastro.service';
-import { Empresa } from '../../interfaces/empresa';
+import { CadastroService } from '../../services/cadastro/cadastro.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +17,6 @@ import { Router } from '@angular/router';
 })
 export class CadastroComponent {
 
-  empresa: Empresa = {};
   requirements: Array<any> = [
     { id: 1, mensagem: 'A sua senha deve conter ao menos 8 caracteres', padrao: /.{8,}/ },
     { id: 2, mensagem: 'Digite pelo menos 1 letra maiúscula', padrao: /[A-Z]+/ },
@@ -27,7 +25,7 @@ export class CadastroComponent {
   ];
   cadastroForm: FormGroup;
 
-  constructor (private cadastroService: CadastroService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private cadastroService: CadastroService, private formBuilder: FormBuilder, private router: Router) {
     this.cadastroForm = formBuilder.group({
       cnpj: ['', [Validators.required, Validators.maxLength(18)]],
       nomeEmpresa: ['', Validators.required],
@@ -45,15 +43,18 @@ export class CadastroComponent {
         cpf: ['', [Validators.required, Validators.maxLength(14)]],
         nomeRepresentante: ['', Validators.required],
         sobrenomeRepresentante: ['', Validators.required],
-        telefone: ['', [Validators.required, Validators.maxLength(15)]],
-        email: ['', [Validators.required, Validators.email]]
+        telefone: ['', [Validators.required, Validators.maxLength(15)]]
       }),
-      senha: ['', [Validators.required, this.senhaValidator]],
-      senhaConfirma: ['', Validators.required],
-      concordarTermos: [null, Validators.pattern(/true/)],
-      aceitarEmails: [null]
+      conta: this.formBuilder.group({
+        nomeUsuario: ['', [Validators.required, Validators.maxLength(25)]],
+        email: ['', [Validators.required, Validators.email]],
+        senha: ['', [Validators.required, this.senhaValidator]],
+        senhaConfirma: ['', Validators.required],
+        concordarTermos: [false, Validators.pattern(/true/)],
+        aceitarEmails: [false]
+      })
     }, { validators: this.senhaConfirmaValidator }
-  );
+    );
   }
 
   validarFormatos(): void {
@@ -98,13 +99,13 @@ export class CadastroComponent {
 
       if (cepValidacao.test(cep.value)) {
         cepValor = cep.value
-            .replace(/\-/, "");
+          .replace(/\-/, "");
         this.cadastroService.buscarEndereco(cepValor).subscribe((data) => {
           this.cadastroForm.patchValue({
             local: {
               endereco: `${data.logradouro}, ${data.bairro}` || '',
               cidade: data.localidade || '',
-              estado: data.estado || ''
+              estado: data.uf || ''
             }
           });
         });
@@ -127,7 +128,7 @@ export class CadastroComponent {
     const reqText = document.querySelectorAll('.requirement-text') as NodeListOf<HTMLElement>;
 
     senha.addEventListener('input', () => {
-      
+
       reqIcon.forEach(req => {
         if (!req.classList.contains('requirement-confirm')) {
           req.style.display = 'block';
@@ -218,28 +219,29 @@ export class CadastroComponent {
     }
 
     const isValid = /.{8,}/.test(control.value) &&
-    /[A-Z]+/.test(control.value) &&
-    /\d+/.test(control.value) &&
-    /[$&+,:;=?@#|'<>.^*()%!-]+/.test(control.value);
-    
-    return isValid ? null : { required: true }; 
+      /[A-Z]+/.test(control.value) &&
+      /\d+/.test(control.value) &&
+      /[$&+,:;=?@#|'<>.^*()%!-]+/.test(control.value);
+
+    return isValid ? null : { required: true };
 
   }
 
   senhaConfirmaValidator(form: FormGroup) {
 
-    const senha = form.get('senha')?.value;
-    const senhaConfirma = form.get('senhaConfirma')?.value;
+    const senha = form.get('conta.senha')?.value;
+    const senhaConfirma = form.get('conta.senhaConfirma')?.value;
 
     if (!form || !form.controls) {
       return null;
     }
 
-    if (senha !== senhaConfirma) {
-      return { required: true }
-    }
-    return null;
+    return senha === senhaConfirma ? null : { required: true };
 
+  }
+
+  cadastrarEmpresa(): void {
+    
   }
 
   ngOnInit(): void {
@@ -254,9 +256,9 @@ export class CadastroComponent {
   onSubmit(): void {
     alert('Formulário enviadoo :3');
     alert(this.cadastroForm.valid);
-    console.log(this.cadastroForm.controls);
+    console.log(JSON.stringify(this.cadastroForm.value));
     if (this.cadastroForm.valid) {
-      this.router.navigate(['/perguntas']);
+      this.cadastrarEmpresa();
     }
   }
 

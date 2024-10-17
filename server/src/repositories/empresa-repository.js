@@ -28,11 +28,18 @@ exports.get = async () => {
     }
 }
 
-exports.create = async (data) => {
+exports.create = async (data, local) => {
     try {
+
+        const cnpj = data.cnpj
+            .replace(/\D/g, "");
+        
+        const cpf = data.representante.cpf
+            .replace(/\D/g, "");
+
         const con = await conectar();
-        con.query('INSERT INTO fornecedores VALUES(?, ?, ?, ?, ?, ?, ?)',
-            [data.cnpj, data.nome_empresa, data.receita_bruta, data.receita_liquida, data.qtd_empregados, data.cpf_representante, data.id_local]);
+        con.query('INSERT INTO fornecedores VALUES(?, ?, ?, ?, ?, ?)',
+            [cnpj, data.nomeEmpresa, data.receitaBruta, data.qtdEmpregados, cpf, local]);
     } catch (err) {
         throw err;
     }
@@ -41,8 +48,8 @@ exports.create = async (data) => {
 exports.update = async (id, data) => {
     try {
         const con = await conectar();
-        con.query('UPDATE fornecedores SET nome_empresa = ?, receita_bruta = ?, receita_liquida = ?, qtd_empregados = ?, cpf_representante = ?, id_local = ? WHERE cnpj = ?',
-            [data.nome_empresa, data.receita_bruta, data.receita_liquida, data.qtd_empregados, data.cpf_representante, data.id_local, data.cnpj]);
+        con.query('UPDATE fornecedores SET nome_empresa = ?, receita_bruta = ?, receita_liquida = ?, qtd_empregados = ?, cpf_representante = ?, id_local = ? WHERE cnpj_empresa = ?',
+            [data.nome_empresa, data.receita_bruta, data.receita_liquida, data.qtd_empregados, data.cpf_representante, data.id_local, data.cnpj_empresa]);
     } catch (err) {
         throw err;
     }
