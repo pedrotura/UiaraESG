@@ -12,8 +12,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 export const routes: Routes = [
     { path: '', component: PortalComponent },
     { path: 'home', component: HomepageComponent },
-    { path: 'pessoas', component: PessoasComponent },
-    { path: 'empresas', component: EmpresasComponent },
+    { path: 'individuos', component: PessoasComponent },
+    { path: 'organizacoes', component: EmpresasComponent },
     { path: 'login', component: LoginComponent },
     { path: 'senha-reset', component: SenhaResetComponent },
     { path: 'cadastro', component: CadastroComponent },

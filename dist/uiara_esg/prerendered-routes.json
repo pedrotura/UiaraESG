@@ -2,11 +2,11 @@
   "routes": [
     "/",
     "/cadastro",
-    "/empresas",
     "/home",
+    "/individuos",
     "/login",
+    "/organizacoes",
     "/perguntas",
-    "/pessoas",
     "/senha-reset"
   ]
 }
